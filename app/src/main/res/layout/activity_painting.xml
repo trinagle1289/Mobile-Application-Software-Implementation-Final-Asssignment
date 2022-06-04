@@ -36,7 +36,6 @@
             android:layout_margin="5dp"
             android:text="門口" />
 
-
         <Button
             android:id="@+id/painting_btTable"
             android:layout_width="wrap_content"
@@ -47,7 +46,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/painting_imageView2"
+        android:id="@+id/painting_canvas"
         android:layout_width="339dp"
         android:layout_height="310dp"
         android:layout_gravity="center"

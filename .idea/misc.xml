@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/user/AndroidStudioProjects/Mobile-Application-Software-Implementation-Final-Asssignment/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Mobile-Application-Software-Implementation-Final-Asssignment/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Mobile-Application-Software-Implementation-Final-Asssignment/app/src/main/res/layout/activity_painting.xml" value="0.33" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Mobile-Application-Software-Implementation-Final-Asssignment/app/src/main/res/menu/menu_draw.xml" value="0.33" />
       </map>
     </option>
   </component>
