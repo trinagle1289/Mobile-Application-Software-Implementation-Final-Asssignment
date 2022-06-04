@@ -36,8 +36,6 @@ public class PaintingActivity extends AppCompatActivity {
 
         rlBkg = findViewById(R.id.painting_bkg);
 
-        genItem(ItemSelect.Table);
-
     }
 
     @Override
@@ -58,6 +56,7 @@ public class PaintingActivity extends AppCompatActivity {
             case R.id.menu_add_door:
                 break;
             case R.id.menu_add_table:
+                genItem(ItemSelect.Table);
                 break;
             case R.id.menu_add_wall:
                 break;
@@ -75,7 +74,6 @@ public class PaintingActivity extends AppCompatActivity {
     // 生成物件
     private Item genItem(ItemSelect itemSelect) {
         Bitmap bmp;
-
 
         switch (itemSelect) {
             case Table:
