@@ -22,14 +22,14 @@
         android:padding="10dp">
 
         <Button
-            android:id="@+id/btnwall"
+            android:id="@+id/painting_btWall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="牆壁" />
 
         <Button
-            android:id="@+id/btndoor"
+            android:id="@+id/painting_btDoor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -37,7 +37,7 @@
 
 
         <Button
-            android:id="@+id/btntable"
+            android:id="@+id/painting_btTable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/painting_imageView2"
         android:layout_width="339dp"
         android:layout_height="310dp"
         app:srcCompat="@drawable/ic_launcher_background" />
@@ -58,14 +58,14 @@
         android:padding="10dp">
 
         <Button
-            android:id="@+id/btnback"
+            android:id="@+id/painting_btBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="返回" />
 
         <Button
-            android:id="@+id/btneca"
+            android:id="@+id/painting_btErase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -73,7 +73,7 @@
 
 
         <Button
-            android:id="@+id/btnsave"
+            android:id="@+id/painting_btSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
