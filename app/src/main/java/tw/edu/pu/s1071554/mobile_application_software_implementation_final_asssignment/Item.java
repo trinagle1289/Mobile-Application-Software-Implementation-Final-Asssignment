@@ -1,15 +1,24 @@
 package tw.edu.pu.s1071554.mobile_application_software_implementation_final_asssignment;
 
-import android.graphics.Canvas;
+import android.content.Context;
+import android.graphics.Bitmap;
 
-abstract public class Item {
-    int x, y;
+public class Item extends androidx.appcompat.widget.AppCompatImageView {
 
-    public abstract void Draw(Canvas canvas);
+    float centerX = 0, centerY = 0;
 
-    public void DrawXY(Canvas canvas, int _x, int _y) {
+    float x = centerX, y = centerY;
+
+    public Item(Context context, Bitmap _bmp, float _x, float _y) {
+        super(context);
+
         x = _x;
         y = _y;
-        Draw(canvas);
+
+        setImageBitmap(_bmp);
+        setX(x);
+        setY(y);
     }
+
+
 }
