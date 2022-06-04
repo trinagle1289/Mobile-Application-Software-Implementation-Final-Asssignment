@@ -16,6 +16,12 @@ import android.widget.RelativeLayout;
 
 public class PaintingActivity extends AppCompatActivity {
 
+    enum ItemSelect {
+        Table,
+        Door,
+        Wall
+    }
+
     RelativeLayout rlBkg = null;
 
     // 螢幕寬跟高資料
@@ -30,16 +36,7 @@ public class PaintingActivity extends AppCompatActivity {
 
         rlBkg = findViewById(R.id.painting_bkg);
 
-        // 抓畫面資料
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        screenWidth = displayMetrics.widthPixels;
-        screenHeight = displayMetrics.heightPixels;
-
-        tableBmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
-
-        Item item = new Item(this, tableBmp, 200, 200);
-        rlBkg.addView(item);
+        genItem(ItemSelect.Table);
 
     }
 
@@ -76,8 +73,35 @@ public class PaintingActivity extends AppCompatActivity {
     }
 
     // 生成物件
-    private void generateItem(Item item) {
+    private Item genItem(ItemSelect itemSelect) {
+        Bitmap bmp;
 
+
+        switch (itemSelect) {
+            case Table:
+                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+                break;
+            case Door:
+                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+                break;
+            case Wall:
+                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+                break;
+            default:
+                return null;
+        }
+
+        // 抓畫面資料
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
+
+        Item item = new Item(this, bmp, screenWidth / 2, screenHeight / 2);
+
+        rlBkg.addView(item);
+
+        return item;
     }
 
     // 清除所有物件
