@@ -8,38 +8,65 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+
 public class PaintingActivity extends AppCompatActivity {
 
+    // 物件選擇的列舉單
     enum ItemSelect {
         Table,
         Door,
         Wall
     }
 
+    // 背景 UI
     RelativeLayout rlBkg = null;
 
     // 螢幕寬跟高資料
     int screenWidth, screenHeight;
 
-    Bitmap tableBmp; // 抓圖案
+    // 物件陣列
+    ArrayList<Item> iList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_painting);
 
+        // 初始化 UI
         rlBkg = findViewById(R.id.painting_bkg);
-
+        // 設定螢幕資料
+        setScreenData();
     }
+
+    float x, y;
+    float dx, dy;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            x = event.getX();
+            y = event.getY();
+        }
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            dx = event.getX() - x;
+            dy = event.getY() - y;
+
+            rlBkg.setX(rlBkg.getX() + dx);
+            rlBkg.setY(rlBkg.getY() + dy);
+
+            x = event.getX();
+            y = event.getY();
+        }
 
         return super.onTouchEvent(event);
     }
@@ -54,15 +81,19 @@ public class PaintingActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add_door:
+                genItem(ItemSelect.Door);
                 break;
             case R.id.menu_add_table:
                 genItem(ItemSelect.Table);
                 break;
             case R.id.menu_add_wall:
+                genItem(ItemSelect.Wall);
                 break;
             case R.id.menu_clear:
+                clear();
                 break;
             case R.id.menu_save:
+                save();
                 break;
             default:
                 break;
@@ -73,30 +104,23 @@ public class PaintingActivity extends AppCompatActivity {
 
     // 生成物件
     private Item genItem(ItemSelect itemSelect) {
-        Bitmap bmp;
+        Item item = null;
 
         switch (itemSelect) {
             case Table:
-                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+                item = new Table(this, screenWidth / 2, screenHeight / 2);
                 break;
             case Door:
-                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+                item = new Door(this, screenWidth / 2, screenHeight / 2);
                 break;
             case Wall:
-                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+                item = new Wall(this, screenWidth / 2, screenHeight / 2);
                 break;
             default:
                 return null;
         }
 
-        // 抓畫面資料
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        screenWidth = displayMetrics.widthPixels;
-        screenHeight = displayMetrics.heightPixels;
-
-        Item item = new Item(this, bmp, screenWidth / 2, screenHeight / 2);
-
+        iList.add(item);
         rlBkg.addView(item);
 
         return item;
@@ -104,12 +128,20 @@ public class PaintingActivity extends AppCompatActivity {
 
     // 清除所有物件
     private void clear() {
-
+        rlBkg.removeAllViews();
     }
 
     // 存取檔案
     private void save() {
 
+    }
+
+    // 設定畫面資料
+    private void setScreenData() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
     }
 
 }

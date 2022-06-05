@@ -3,22 +3,27 @@ package tw.edu.pu.s1071554.mobile_application_software_implementation_final_asss
 import android.content.Context;
 import android.graphics.Bitmap;
 
-public class Item extends androidx.appcompat.widget.AppCompatImageView {
+abstract public class Item extends androidx.appcompat.widget.AppCompatImageView {
 
-    float centerX = 0, centerY = 0;
+    // 圖片素材
+    Bitmap bmp = null;
 
-    float x = centerX, y = centerY;
-
-    public Item(Context context, Bitmap _bmp, float _x, float _y) {
+    public Item(Context context, float _x, float _y) {
         super(context);
 
-        x = _x;
-        y = _y;
+        setImageAsset();
+        setImageBitmap(bmp);
 
-        setImageBitmap(_bmp);
-        setX(x);
-        setY(y);
+        move(_x, _y);
     }
 
+    // 設定圖片素材
+    abstract void setImageAsset();
+
+    // 以中心點來移動物件
+    public void move(float _x, float _y) {
+        setX(_x);
+        setY(_y);
+    }
 
 }
