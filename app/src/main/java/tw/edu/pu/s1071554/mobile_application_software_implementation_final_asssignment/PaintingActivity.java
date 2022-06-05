@@ -3,18 +3,15 @@ package tw.edu.pu.s1071554.mobile_application_software_implementation_final_asss
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,6 +29,7 @@ public class PaintingActivity extends AppCompatActivity {
 
     // 螢幕寬跟高資料
     int screenWidth, screenHeight;
+    View selectedItem = null;
 
     // 物件陣列
     ArrayList<Item> iList = new ArrayList<>();
@@ -47,8 +45,9 @@ public class PaintingActivity extends AppCompatActivity {
         setScreenData();
     }
 
-    float x, y;
-    float dx, dy;
+
+    float x = 0, y = 0;
+    float dx = 0, dy = 0;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -61,8 +60,8 @@ public class PaintingActivity extends AppCompatActivity {
             dx = event.getX() - x;
             dy = event.getY() - y;
 
-            rlBkg.setX(rlBkg.getX() + dx);
-            rlBkg.setY(rlBkg.getY() + dy);
+            selectedItem.setX(selectedItem.getX() + dx);
+            selectedItem.setY(selectedItem.getY() + dy);
 
             x = event.getX();
             y = event.getY();
@@ -122,6 +121,15 @@ public class PaintingActivity extends AppCompatActivity {
 
         iList.add(item);
         rlBkg.addView(item);
+
+        item.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                selectedItem = view;
+            }
+
+        });
 
         return item;
     }
