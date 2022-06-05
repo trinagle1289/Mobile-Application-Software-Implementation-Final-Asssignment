@@ -12,5 +12,7 @@ public class Door extends Item {
     @Override
     void setImageAsset() {
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.door);
+        setScaleX(0.5f);
+        setScaleY(0.5f);
     }
 }

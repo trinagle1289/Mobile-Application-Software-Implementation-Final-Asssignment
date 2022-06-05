@@ -13,6 +13,8 @@ public class Table extends Item {
     @Override
     void setImageAsset() {
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+        setScaleX(0.5f);
+        setScaleY(0.5f);
     }
 
 }

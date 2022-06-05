@@ -3,9 +3,13 @@ package tw.edu.pu.s1071554.mobile_application_software_implementation_final_asss
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -13,7 +17,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PaintingActivity extends AppCompatActivity {
 
@@ -29,7 +39,7 @@ public class PaintingActivity extends AppCompatActivity {
 
     // 螢幕寬跟高資料
     int screenWidth, screenHeight;
-    View selectedItem = null;
+    Item selectedItem = null;
 
     // 物件陣列
     ArrayList<Item> iList = new ArrayList<>();
@@ -94,6 +104,9 @@ public class PaintingActivity extends AppCompatActivity {
             case R.id.menu_save:
                 save();
                 break;
+            case R.id.menu_rotate_item:
+                selectedItem.rotate90();
+                break;
             default:
                 break;
         }
@@ -104,16 +117,20 @@ public class PaintingActivity extends AppCompatActivity {
     // 生成物件
     private Item genItem(ItemSelect itemSelect) {
         Item item = null;
+        String selectMsg = "選擇";
 
         switch (itemSelect) {
             case Table:
                 item = new Table(this, screenWidth / 2, screenHeight / 2);
+                selectMsg += "桌子";
                 break;
             case Door:
                 item = new Door(this, screenWidth / 2, screenHeight / 2);
+                selectMsg += "門";
                 break;
             case Wall:
                 item = new Wall(this, screenWidth / 2, screenHeight / 2);
+                selectMsg += "牆壁";
                 break;
             default:
                 return null;
@@ -122,11 +139,13 @@ public class PaintingActivity extends AppCompatActivity {
         iList.add(item);
         rlBkg.addView(item);
 
+        String finalSelectMsg = selectMsg.toString();
         item.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                selectedItem = view;
+                selectedItem = (Item) view;
+                Toast.makeText(PaintingActivity.this, finalSelectMsg, Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -139,7 +158,7 @@ public class PaintingActivity extends AppCompatActivity {
         rlBkg.removeAllViews();
     }
 
-    // 存取檔案
+    // 儲存為圖片
     private void save() {
 
     }
