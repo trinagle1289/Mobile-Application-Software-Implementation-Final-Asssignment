@@ -156,6 +156,7 @@ public class PaintingActivity extends AppCompatActivity {
     // 清除所有物件
     private void clear() {
         rlBkg.removeAllViews();
+        iList.clear();
     }
 
     // 儲存為圖片
