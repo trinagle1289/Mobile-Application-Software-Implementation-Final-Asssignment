@@ -62,19 +62,21 @@ public class PaintingActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            x = event.getX();
-            y = event.getY();
-        }
-        if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            dx = event.getX() - x;
-            dy = event.getY() - y;
+        if (selectedItem != null) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                x = event.getX();
+                y = event.getY();
+            }
+            if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                dx = event.getX() - x;
+                dy = event.getY() - y;
 
-            selectedItem.setX(selectedItem.getX() + dx);
-            selectedItem.setY(selectedItem.getY() + dy);
+                selectedItem.setX(selectedItem.getX() + dx);
+                selectedItem.setY(selectedItem.getY() + dy);
 
-            x = event.getX();
-            y = event.getY();
+                x = event.getX();
+                y = event.getY();
+            }
         }
 
         return super.onTouchEvent(event);
